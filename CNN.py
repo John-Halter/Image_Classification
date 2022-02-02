@@ -6,24 +6,20 @@ import numpy as np
 import keras
 import tensorflow as tf
 from Constants import LIST_OF_SPECIES, output_dir
+from dataset_manipulation import create_training_data, create_testing_data
 matplotlib.use('TkAgg')
 
 
-def create_training_data():
-    for species in LIST_OF_SPECIES:
-        path = os.path.join(output_dir, species + " Butterfly")
-        class_num = LIST_OF_SPECIES.index(species)
-        for img in os.listdir(path):
-            img_array = cv2.imread(os.path.join(path,img), cv2.IMREAD_COLOR) # Shape is size (some number, some number, 3) 3 for rgb
-            plt.imshow(img_array)
-            plt.show()
-            break
-        break
+# TODO: Fix error message with gpu not being used for tensorflow
+batch_size = 32
+img_height = 200
+img_width = 200
+training_dataset = create_training_data(batch_size,img_height,img_width, output_dir)
+testing_dataset = create_testing_data(batch_size,img_height,img_width, output_dir)
+
+class_names = training_dataset.class_names
+print(class_names)
 
 
-
-# model = tf.keras.models.Sequential(
-#     tf.keras.layers.Conv2D(16,(3,3),activation = "relu" , input_shape = (180,180,3)
-# ))
 
 plt.show()
