@@ -7,34 +7,40 @@ import keras
 import tensorflow as tf
 from keras.models import Sequential
 
+from data_gather import download_pictures
 from Constants import LIST_OF_SPECIES, output_dir
 from dataset_manipulation import create_training_data
 matplotlib.use('TkAgg')
 
+download_pics = True
+run_cnn = False
+
+if download_pics:
+  download_pictures(LIST_OF_SPECIES,100,output_dir)
+
 
 # TODO: Fix error message with gpu not being used for tensorflow
-batch_size = 32
-img_height = 200
-img_width = 200
-training_dataset = create_training_data(batch_size,img_height,img_width, output_dir, 'training')
-testing_dataset = create_training_data(batch_size,img_height,img_width, output_dir, 'validation')
+if run_cnn:
+  img_height = 200
+  img_width = 200
+  training_dataset = create_training_data(img_height,img_width, output_dir, 'training')
+  testing_dataset = create_training_data(img_height,img_width, output_dir, 'validation')
 
-class_names = training_dataset.class_names
-
-
-AUTOTUNE = tf.data.AUTOTUNE
-
-train_ds = training_dataset.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
-val_ds = testing_dataset.cache().prefetch(buffer_size=AUTOTUNE)
-normalization_layer = tf.keras.layers.Rescaling(1./255)
-normalized_ds = training_dataset.map(lambda x, y: (normalization_layer(x), y))
-image_batch, labels_batch = next(iter(normalized_ds))
-first_image = image_batch[0]
-
-num_classes = len(class_names)
+  class_names = training_dataset.class_names
 
 
-model = Sequential([
+  AUTOTUNE = tf.data.AUTOTUNE
+
+  train_ds = training_dataset.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
+  val_ds = testing_dataset.cache().prefetch(buffer_size=AUTOTUNE)
+
+
+  num_classes = len(class_names)
+
+
+  # What NN looks like
+  # All training data has to be the same size! See that the last sequence is the number of species
+  model = Sequential([
   tf.keras.layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
   tf.keras.layers.Conv2D(16, 3, padding='same', activation='relu'),
   tf.keras.layers.MaxPooling2D(),
@@ -44,40 +50,42 @@ model = Sequential([
   tf.keras.layers.MaxPooling2D(),
   tf.keras.layers.Flatten(),
   tf.keras.layers.Dense(128, activation='relu'),
-  tf.keras.layers.Dense(num_classes)
-])
+  tf.keras.layers.Dense(num_classes, activation= tf.nn.softmax)
+  ])
 
-model.compile(optimizer='adam',
-              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-              metrics=['accuracy'])
 
-print(model.summary())
+  # Training done here
+  model.compile(optimizer='adam',
+          loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+          metrics=['accuracy'])
 
-epochs=15
-history = model.fit(
+  print(model.summary())
+
+  epochs=10
+  history = model.fit(
   train_ds,
   validation_data=val_ds,
   epochs=epochs
-)
+  )
 
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
+  acc = history.history['accuracy']
+  val_acc = history.history['val_accuracy']
 
-loss = history.history['loss']
-val_loss = history.history['val_loss']
+  loss = history.history['loss']
+  val_loss = history.history['val_loss']
 
-epochs_range = range(epochs)
+  epochs_range = range(epochs)
 
-plt.figure(figsize=(8, 8))
-plt.subplot(1, 2, 1)
-plt.plot(epochs_range, acc, label='Training Accuracy')
-plt.plot(epochs_range, val_acc, label='Validation Accuracy')
-plt.legend(loc='lower right')
-plt.title('Training and Validation Accuracy')
+  plt.figure(figsize=(8, 8))
+  plt.subplot(1, 2, 1)
+  plt.plot(epochs_range, acc, label='Training Accuracy')
+  plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+  plt.legend(loc='lower right')
+  plt.title('Training and Validation Accuracy')
 
-plt.subplot(1, 2, 2)
-plt.plot(epochs_range, loss, label='Training Loss')
-plt.plot(epochs_range, val_loss, label='Validation Loss')
-plt.legend(loc='upper right')
-plt.title('Training and Validation Loss')
-plt.show()
+  plt.subplot(1, 2, 2)
+  plt.plot(epochs_range, loss, label='Training Loss')
+  plt.plot(epochs_range, val_loss, label='Validation Loss')
+  plt.legend(loc='upper right')
+  plt.title('Training and Validation Loss')
+  plt.show()
