@@ -1,4 +1,7 @@
 LIST_OF_SPECIES = ["monarch","common buckeye", "colorado hairstreak",
                    "rocky mountain parnassian", "two-tailed swallowtail", "red admiral"]
 
-output_dir = "C:/Users/Johnny/PycharmProjects/Image_Classification/butterfly_pictures/"
+OUTPUT_DIR = "C:/Users/Johnny/PycharmProjects/Image_Classification/butterfly_pictures/"
+
+IMG_HEIGHT = 200
+IMG_WIDTH = 200
