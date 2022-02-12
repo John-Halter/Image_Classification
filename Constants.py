@@ -3,5 +3,5 @@ LIST_OF_SPECIES = ["monarch","common buckeye", "colorado hairstreak",
 
 OUTPUT_DIR = "C:/Users/Johnny/PycharmProjects/Image_Classification/butterfly_pictures/"
 
-IMG_HEIGHT = 200
-IMG_WIDTH = 200
+IMG_HEIGHT = 150
+IMG_WIDTH = 150
