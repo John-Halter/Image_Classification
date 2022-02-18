@@ -13,9 +13,11 @@ OUTPUT_DIR = "C:/Users/Johnny/PycharmProjects/Image_Classification/butterfly_pic
 NUM_OF_PICS = 150
 
 # The image height and weight used for cnn model
-IMG_HEIGHT = 150
-IMG_WIDTH = 150
+IMG_HEIGHT = 200
+IMG_WIDTH = 200
 
 # The number of epochs used for cnn model
-EPOCHS = 2
+EPOCHS = 30
+
+ITERATIONS = 3
 

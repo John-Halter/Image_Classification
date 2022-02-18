@@ -11,11 +11,11 @@ matplotlib.use('TkAgg')
 # TODO: Fix error message with gpu not being used for tensorflow
 def cnn_model(training_dataset, testing_dataset):
 
-    train_datagen = _data_generator()
-    test_datagen = _data_generator()
+    train_gen = _data_generator()
+    test_gen = _data_generator()
 
-    training_datagen = _new_data_generated(training_dataset,train_datagen)
-    testing_datagen = _new_data_generated(testing_dataset,test_datagen)
+    training_datagen = _new_data_generated(training_dataset,train_gen)
+    testing_datagen = _new_data_generated(testing_dataset,test_gen)
 
     class_names = training_datagen.class_indices  # class_indices
     num_classes = len(class_names)
@@ -36,7 +36,7 @@ def cnn_model(training_dataset, testing_dataset):
 
     # Training done here
     model.compile(optimizer='adam',
-                  loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),  # CategoricalCrossentropy
+                  loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
 
     print(model.summary())
@@ -49,7 +49,9 @@ def cnn_model(training_dataset, testing_dataset):
     )
 
     acc = history.history['accuracy']
+    acc = [val * 100 for val in acc]
     val_acc = history.history['val_accuracy']
+    val_acc = [val * 100 for val in val_acc]
 
     loss = history.history['loss']
     val_loss = history.history['val_loss']
