@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 from pathlib2 import Path
 
 from dataset_creation.dataset_gather import download_pictures, verify_pictures, split_train_test
@@ -12,7 +13,7 @@ if __name__ == '__main__':
     verify_pics = False
     split = False
     run_cnn = True
-    visualization=False
+    visualization=True
 
     if download_pics:
         for i in range(len(LIST_OF_SPECIES)):
@@ -30,3 +31,4 @@ if __name__ == '__main__':
         model,acc, val_acc, loss, val_loss, epochs_range = cnn_model(training_dataset,testing_dataset)
         if visualization:
             plot_accuracy(acc,val_acc,loss,val_loss,epochs_range)
+plt.show()
