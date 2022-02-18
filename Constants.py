@@ -17,7 +17,7 @@ IMG_HEIGHT = 200
 IMG_WIDTH = 200
 
 # The number of epochs used for cnn model
-EPOCHS = 30
+EPOCHS = 2
 
-ITERATIONS = 3
+ITERATIONS = 2
 

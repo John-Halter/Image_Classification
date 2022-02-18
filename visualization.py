@@ -5,79 +5,65 @@ import tensorflow as tf
 from matplotlib import pyplot as plt
 from pathlib2 import Path
 from Constants import IMG_HEIGHT, IMG_WIDTH, ITERATIONS
+from calculated_values import calc_polyfit
 
 matplotlib.use('TkAgg')
 
 
 def plot_accuracy(acc, val_acc, loss, val_loss, epochs_range):
-    if multi_accuracy:
-        fig, ax = plt.subplots(2, figsize=(13, 8))
-        for i in range(0, ITERATIONS):
-            ax[0].plot(epochs_range, acc[i], label=f'Training Acc Iteration {i}')
-            ax[0].plot(epochs_range, val_acc[i], label=f'Validation Acc Iteration {i}')
-            ax[0].set_ylabel("Accuracy Percentage")
-            ax[0].legend(loc='lower right')
-            ax[0].set_title('Training and Validation Accuracy')
-            ax[0].grid()
+    poly_train_acc_x, poly_train_acc_y = calc_polyfit(epochs_range, acc)
+    poly_val_acc_x, poly_val_acc_y = calc_polyfit(epochs_range, val_acc)
 
-            ax[1].plot(epochs_range, loss[i], label=f'Training Loss Iteration {i}')
-            ax[1].plot(epochs_range, val_loss[i], label=f'Validation Loss Iteration {i}')
-            ax[1].set_xlabel("Number of Epochs")
-            ax[1].legend(loc='upper right')
-            ax[1].set_title('Training and Validation Loss')
-            ax[1].grid()
-    else:
-        poly_train_acc_x, poly_train_acc_y = _calc_polyfit(epochs_range, acc)
-        poly_val_acc_x, poly_val_acc_y = _calc_polyfit(epochs_range, val_acc)
+    fig, ax = plt.subplots(2, 2, figsize=(13, 8))
+    ax[0, 0].plot(epochs_range, acc, label='Training Accuracy')
+    ax[0, 0].plot(epochs_range, val_acc, label='Validation Accuracy')
+    ax[0, 0].set_ylabel("Accuracy Percentage")
+    ax[0, 0].legend(loc='lower right')
+    ax[0, 0].set_title('Training and Validation Accuracy')
+    ax[0, 0].grid()
 
-        fig, ax = plt.subplots(2, 2, figsize=(13, 8))
-        ax[0, 0].plot(epochs_range, acc, label='Training Accuracy')
-        ax[0, 0].plot(epochs_range, val_acc, label='Validation Accuracy')
-        ax[0, 0].set_ylabel("Accuracy Percentage")
-        ax[0, 0].legend(loc='lower right')
-        ax[0, 0].set_title('Training and Validation Accuracy')
-        ax[0, 0].grid()
+    ax[0, 1].plot(poly_train_acc_x, poly_train_acc_y, '-', label='Regression Training Acc')
+    ax[0, 1].plot(poly_val_acc_x, poly_val_acc_y, '--', label='Regression Testing Acc')
+    ax[0, 1].set_ylabel("Accuracy Percentage")
+    ax[0, 1].legend(loc='lower right')
+    ax[0, 1].set_title('Training and Validation Accuracy Regression Lines')
+    ax[0, 1].grid()
 
-        ax[0, 1].plot(poly_train_acc_x, poly_train_acc_y, '-', label='Regression Training Acc')
-        ax[0, 1].plot(poly_val_acc_x, poly_val_acc_y, '--', label='Regression Testing Acc')
-        ax[0, 1].set_ylabel("Accuracy Percentage")
-        ax[0, 1].legend(loc='lower right')
-        ax[0, 1].set_title('Training and Validation Accuracy Regression Lines')
-        ax[0, 1].grid()
+    poly_train_loss_x, poly_train_loss_y = calc_polyfit(epochs_range, loss)
+    poly_val_loss_x, poly_val_loss_y = calc_polyfit(epochs_range, val_loss)
 
-        poly_train_loss_x, poly_train_loss_y = _calc_polyfit(epochs_range, loss)
-        poly_val_loss_x, poly_val_loss_y = _calc_polyfit(epochs_range, val_loss)
+    ax[1, 0].plot(epochs_range, loss, label='Training Loss')
+    ax[1, 0].plot(epochs_range, val_loss, label='Validation Loss')
+    ax[1, 0].set_xlabel("Number of Epochs")
+    ax[1, 0].legend(loc='upper right')
+    ax[1, 0].set_title('Training and Validation Loss')
+    ax[1, 0].grid()
 
-        ax[1, 0].plot(epochs_range, loss, label='Training Loss')
-        ax[1, 0].plot(epochs_range, val_loss, label='Validation Loss')
-        ax[1, 0].set_xlabel("Number of Epochs")
-        ax[1, 0].legend(loc='upper right')
-        ax[1, 0].set_title('Training and Validation Loss')
-        ax[1, 0].grid()
+    ax[1, 1].plot(poly_train_loss_x, poly_train_loss_y, '-', label='Training Loss')
+    ax[1, 1].plot(poly_val_loss_x, poly_val_loss_y, '--', label='Validation Loss')
+    ax[1, 1].set_xlabel("Number of Epochs")
+    ax[1, 1].legend(loc='upper right')
+    ax[1, 1].set_title('Training and Validation Loss Regression Lines')
+    ax[1, 1].grid()
 
-        ax[1, 1].plot(poly_train_loss_x, poly_train_loss_y, '-', label='Training Loss')
-        ax[1, 1].plot(poly_val_loss_x, poly_val_loss_y, '--', label='Validation Loss')
-        ax[1, 1].set_xlabel("Number of Epochs")
-        ax[1, 1].legend(loc='upper right')
-        ax[1, 1].set_title('Training and Validation Loss Regression Lines')
-        ax[1, 1].grid()
 
 def plot_multi_accuracy(acc, val_acc, loss, val_loss, epochs_range):
-    fig, ax = plt.subplots(2, figsize=(13, 8))
-    for i in range(0, ITERATIONS):
-        ax[0].plot(epochs_range, acc[i], label=f'Training Acc Iteration {i}')
-        ax[0].plot(epochs_range, val_acc[i], label=f'Validation Acc Iteration {i}')
-        ax[0].set_ylabel("Accuracy Percentage")
-        ax[0].legend(loc='lower right')
-        ax[0].set_title('Training and Validation Accuracy')
-        ax[0].grid()
+    fig, ax = plt.subplots(1,2, figsize=(13, 8))
 
-        ax[1].plot(epochs_range, loss[i], label=f'Training Loss Iteration {i}')
-        ax[1].plot(epochs_range, val_loss[i], label=f'Validation Loss Iteration {i}')
-        ax[1].set_xlabel("Number of Epochs")
-        ax[1].legend(loc='upper right')
-        ax[1].set_title('Training and Validation Loss')
-        ax[1].grid()
+    df_acc = {'Train Accuracy': acc, 'Validation Accuracy': val_acc}
+    df_acc_keys = list(df_acc.keys())
+    ax[0].boxplot(df_acc.values())
+    # ax[0].set_xticks((1, 2))
+    # ax[0].set_xticklabels(df_acc_keys)
+
+    df_loss = {'Train Loss': loss, 'Validation Loss': val_loss}
+    df_loss_keys = list(df_loss.keys())
+    ax[1].boxplot(df_loss.values())
+    # ax[1].set_xticks((1, 2))
+    # ax[1].set_xticklabels(df_loss_keys)
+
+
+
 
 def plot_model_outline(model):
     dot_img_file = str(Path.cwd() / 'cnn_outline_model.png')
@@ -178,11 +164,3 @@ def plot_feature_map(model):
 
     # 15th channel of the image after first layer of convolution is applied
     plt.matshow(first_layer_activation[0, :, :, 15], cmap='viridis')
-
-
-def _calc_polyfit(num_of_epochs, accuracy):
-    coefficients = np.polyfit(num_of_epochs, accuracy, 3)
-    poly = np.poly1d(coefficients)
-    new_x = np.linspace(num_of_epochs[0], num_of_epochs[-1])
-    new_y = poly(new_x)
-    return new_x, new_y
