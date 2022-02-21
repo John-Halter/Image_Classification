@@ -1,5 +1,8 @@
 """
-Constants file containing different parameters used throughout files
+Image Classification
+Description of File: Constants file containing different parameters used throughout files
+Author: John Halter
+Last Updated: 02/21/22
 """
 
 # List of butterfly species to use for data collection
@@ -18,6 +21,5 @@ IMG_WIDTH = 200
 
 # The number of epochs used for cnn model
 EPOCHS = 2
-
-ITERATIONS = 2
+ITERATIONS = 1
 

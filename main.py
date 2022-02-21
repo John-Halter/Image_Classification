@@ -1,23 +1,34 @@
+"""
+Image Classification
+Description of File: The main file where you can access all functions by setting different conditions to true
+Author: John Halter
+Last Updated: 02/21/22
+"""
 from matplotlib import pyplot as plt
 from pathlib2 import Path
 
-from dataset_creation.dataset_gather import download_pictures, verify_pictures, split_train_test
-from Constants import LIST_OF_SPECIES, OUTPUT_DIR, NUM_OF_PICS, ITERATIONS
+from dataset_creation.dataset_gather import download_pictures, verify_pictures
+from dataset_creation.dataset_manipulation import split_train_test
+from Constants import LIST_OF_SPECIES, OUTPUT_DIR, NUM_OF_PICS
 from cnn import cnn_model
-from visualization import plot_accuracy, plot_model_outline, plot_layers, plot_feature_map, plot_multi_accuracy
+from visualization import plot_accuracy, plot_model_outline, plot_example_feature_map
 
 if __name__ == '__main__':
+    # Training and testing dataset paths
     training_dataset = Path.cwd() / 'train'
     testing_dataset = Path.cwd() / 'test'
 
     # Conditions to access functionality of code
     download_pics = False
+    # Verify if pictures are worth keeping
     verify_pics = False
+    # Split the dataset into the different sections
     split = False
-    run_cnn = False
-    run_cnn_multi = True
-    model_outline = False
-    layers = False
+    # Run the cnn model
+    run_cnn = True
+    # Print the model structure
+    model_outline = True
+    # Print an example of the features of the model for an image
     feature = False
 
     if download_pics:
@@ -35,19 +46,7 @@ if __name__ == '__main__':
         plot_accuracy(acc, val_acc, loss, val_loss, epochs_range)
         if model_outline:
             plot_model_outline(model)
-        if layers:
-            plot_layers(model)
         if feature:
-            plot_feature_map(model)
-    if run_cnn_multi:
-        acc_ls, val_acc_ls,loss_ls, val_loss_ls, epochs_range_ls = [], [], [], [], []
-        for i in range(1,ITERATIONS + 1):
-            model, acc, val_acc, loss, val_loss, epochs_range = cnn_model(training_dataset, testing_dataset)
-            acc_ls.append(acc)
-            val_acc_ls.append(val_acc)
-            loss_ls.append(loss)
-            val_loss_ls.append(val_loss)
-            epochs_range_ls.append(epochs_range)
-        plot_multi_accuracy(acc_ls,val_acc_ls,loss_ls,val_loss_ls,epochs_range_ls)
+            plot_example_feature_map(model)
 
 plt.show()
