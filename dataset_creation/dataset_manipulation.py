@@ -5,7 +5,6 @@ Author: John Halter
 Last Updated: 02/21/22
 """
 import os
-import tensorflow as tf
 
 from pathlib2 import Path
 from sklearn.model_selection import train_test_split
@@ -16,7 +15,7 @@ from dataset_creation.dataset_gather import make_dir
 def split_train_test(main_dir):
     """
     Function where each dataset is split into training and testing directories for model learning
-    :param main_dir: the main directory where images are currently held
+    :param main_dir: the main_directory directory where images are currently held
     :return: places images into new directory for learning
     """
     current_dir = str(Path.cwd())

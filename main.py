@@ -1,6 +1,6 @@
 """
 Image Classification
-Description of File: The main file where you can access all functions by setting different conditions to true
+Description of File: The main_directory file where you can access all functions by setting different conditions to true
 Author: John Halter
 Last Updated: 02/21/22
 """
