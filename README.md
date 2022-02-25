@@ -54,7 +54,7 @@ the flatten and dense layers are to flatten the input so the dense layer can mak
 ___
 After tweaking and making several iterations of the model above the final results are shown below:
 <p align="center">
-  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\model_accuracy_loss_plot.png" width="550" />
+  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/model_accuracy_loss_plot40.png" width="550" />
 </p>
 From the image shown the model reached an average accuracy of ~85% over 40 iterations. The reason for so many iterations is to 
 compensate for the lack of data. The regression lines help clear some of the variability of the inital plots.
