@@ -42,7 +42,7 @@ was increased. With a better dataset the model would improve and be adjusted whe
 The model itself was created also using keras Sequential model. The model is outlined below:
 
 <p align="center">
-  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\cnn_outline_model.png" width="375">
+  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\cnn_outline_model.png" width="375" />
 </p>
 
 The model rescales the images down to all be equal. Then it uses multiple convolutional 2D layers and pooling
@@ -54,14 +54,14 @@ the flatten and dense layers are to flatten the input so the dense layer can mak
 ___
 After tweaking and making several iterations of the model above the final results are shown below:
 <p align="center">
-  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\model_accuracy_loss_plot.png" width="550">
+  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\model_accuracy_loss_plot.png" width="550" />
 </p>
 From the image shown the model reached an average accuracy of ~85% over 40 iterations. The reason for so many iterations is to 
 compensate for the lack of data. The regression lines help clear some of the variability of the inital plots.
 From these plots it still looks to seem that they are trending upward. Increasing the number of iterations can show that
 
 <p align="center">
-  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\model_accuracy_loss_plot50.png" width="550">
+  <img src="C:\Users\Johnny\PycharmProjects\Image_Classification\images\model_accuracy_loss_plot50.png" width="550" />
 </p>
 
 With the number of epochs increased to 50 we see more of a plateau in the average accuracy of ~90%. 
