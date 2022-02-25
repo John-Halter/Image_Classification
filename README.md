@@ -54,14 +54,14 @@ the flatten and dense layers are to flatten the input so the dense layer can mak
 ___
 After tweaking and making several iterations of the model above the final results are shown below:
 <p align="center">
-  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/model_accuracy_loss_plot40.png" width="600" />
+  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/model_accuracy_loss_plot40.png" width="700" />
 </p>
 From the image shown the model reached an average accuracy of ~85% over 40 iterations. The reason for so many iterations is to 
 compensate for the lack of data. The regression lines help clear some of the variability of the inital plots.
 From these plots it still looks to seem that they are trending upward. Increasing the number of iterations can show that
 
 <p align="center">
-  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/model_accuracy_loss_plot50.png" width="600" />
+  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/model_accuracy_loss_plot50.png" width="700" />
 </p>
 
 With the number of epochs increased to 50 we see more of a plateau in the average accuracy of ~90%. 
