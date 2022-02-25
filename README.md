@@ -21,10 +21,19 @@ ___
 - Python 3.10
 - Pycharm 2021.3
 
-## Project Outline:
+## Project Structure:
 
 ### 1. Dataset Creation
 ___
 The dataset was created using a module that scrapped bing images named 
 [icrawler](https://icrawler.readthedocs.io/en/latest/builtin.html). This module has several parameters and with these
-the different butterfly names and number of photos to extract would be used as input. 
+the different butterfly names and number of photos to extract would be used as input.
+
+### 2. Model Creation
+___
+
+### 3. Results
+___
+
+### Improvements
+___
