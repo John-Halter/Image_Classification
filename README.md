@@ -42,7 +42,7 @@ was increased. With a better dataset the model would improve and be adjusted whe
 The model itself was created also using keras Sequential model. The model is outlined below:
 
 <p align="center">
-  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/cnn_outline_model.pngg" width="400" />
+  <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/cnn_outline_model.png" width="400" />
 </p>
 
 The model rescales the images down to all be equal. Then it uses multiple convolutional 2D layers and pooling
