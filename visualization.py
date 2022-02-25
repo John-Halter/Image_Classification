@@ -99,6 +99,7 @@ def plot_example_feature_map(model):
     # Plotting image used
     fig, ax = plt.subplots()
     ax.imshow(img_tensor[0])
+    ax.axis('off')
     image_path = str(Path.cwd() / 'images')
     fig.savefig(image_path + f'/single_image.png')
     # Getting the layer of the model to use for the feature map
