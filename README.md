@@ -8,7 +8,10 @@ The following project uses a convolutional neural network to classify some of th
 The reasons I wanted to make this type of project was to gain experience working with supervised learning models.
 Another goal of mine was to create my own dataset from scratch to really comprehend the models output.
 Using this personally created dataset, I wanted  to use Keras and Tensorflow to create a
-convolutional neural network that could classify the following butterflies native to Colorado:
+convolutional neural network that could classify butterflies. As someone who enjoys the outdoors,
+seeing butterflies was common and got me questioning which butterfly was what.
+Living in Colorado I thought it would be interesting to create a classifier for the following common 
+butterflies native to Colorado:
 - Colorado Hairstreak
 - Common Buckeye
 - Monarch
@@ -28,15 +31,16 @@ ___
 The dataset was created using a module that scrapped bing images named 
 [icrawler](https://icrawler.readthedocs.io/en/latest/builtin.html). This module has several parameters and with these
 the different butterfly names and number of photos to extract would be used as input. 
-The package then downloads all available pictures from Bing images. The function where this occurs is called 
+This package was not the first one used, but had become the best solution as the previous package became obsolete. 
+The icrawler package then downloads all available pictures from Bing images. The function where this occurs is called 
 *download_pictures* in the *dataset_gather* located in the *dataset_creation* directory.
 The problem with this is it also downloads unwanted photos. Another function was created to address this issue.
 This function called *verify_pictures* in the code is to go through each individual image and keep or delete the 
 current displayed photo. After verifying all the images The next step is to create the model and train it.
 ### 2. Model Creation
 ___
-For the CNN model to work it needs a training and testing dataset. After initial testing the dataset that was being used 
-was overfitting. To address this, data augmentation would be used to create a better dataset to work with. 
+For the CNN model to work it needs a training and testing dataset. After initial testing, the dataset that was being used 
+was overfitting. To address this, data augmentation would be used to create a larger dataset to work with. 
 Using keras and its *Image_Generator* functionality, the datasets were both augmented and the total number of images
 was increased. With a better dataset the model would improve and be adjusted when necessary. 
 The model itself was created also using keras Sequential model. The model is outlined below:
@@ -45,9 +49,9 @@ The model itself was created also using keras Sequential model. The model is out
   <img src="https://github.com/John-Halter/Image_Classification/blob/main/images/cnn_outline_model.png" width="400" />
 </p>
 
-The model rescales the images down to all be equal. Then it uses multiple convolutional 2D layers and pooling
+The model rescales the images down to all be equal sizes. Then it uses multiple convolutional 2D layers and pooling layers
 them as well. After testing multiple models this one was the final result.
-As this model uses a lot of trainable parameters because the image's perspective has more variety.
+As this model uses a lot of trainable parameters because the image's perspective contain more variety.
 A dropout layer is used as one of the final layers to prevent even more overfitting. As for the last couple of layers,
 the flatten and dense layers are to flatten the input so the dense layer can make the final classification of the images.
 ### 3. Results
