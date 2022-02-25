@@ -112,5 +112,5 @@ def plot_example_feature_map(model):
         if np.any(activations[0,:,:, i-1]):
             plt.imshow(activations[0, :, :, i - 1], cmap='viridis')
         plt.axis('off')
-        fig.savefig(image_path + f'/single_image_feature.png')
+        plt.savefig(image_path + f'/single_image_feature.png')
     plt.show()
