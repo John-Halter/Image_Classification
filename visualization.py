@@ -99,6 +99,8 @@ def plot_example_feature_map(model):
     # Plotting image used
     fig, ax = plt.subplots()
     ax.imshow(img_tensor[0])
+    image_path = str(Path.cwd() / 'images')
+    fig.savefig(image_path + f'/single_image.png')
     # Getting the layer of the model to use for the feature map
     layer_outputs = [layer.output for layer in model.layers[:6]]
     activation_model = models.Model(inputs=model.input, outputs=layer_outputs[1])
@@ -106,7 +108,9 @@ def plot_example_feature_map(model):
     # Plotting feature map
     plt.figure(figsize=(10, 10))
     for i in range(1, activations.shape[3] + 1):
-        plt.subplot(8, 8, i)
-        plt.imshow(activations[0, :, :, i - 1], cmap='viridis')
+        plt.subplot()
+        if np.any(activations[0,:,:, i-1]):
+            plt.imshow(activations[0, :, :, i - 1], cmap='viridis')
         plt.axis('off')
+        fig.savefig(image_path + f'/single_image_feature.png')
     plt.show()
