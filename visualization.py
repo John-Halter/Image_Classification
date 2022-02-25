@@ -14,7 +14,7 @@ from keras.preprocessing import image
 from keras import models
 from matplotlib import pyplot as plt
 from pathlib2 import Path
-from Constants import IMG_HEIGHT, IMG_WIDTH
+from Constants import IMG_HEIGHT, IMG_WIDTH, EPOCHS
 from calculated_values import calc_polyfit
 from dataset_creation.dataset_gather import make_dir
 
@@ -70,7 +70,7 @@ def plot_accuracy(acc, val_acc, loss, val_loss, epochs_range):
 
     accuracy_plot_path = str(Path.cwd() / 'images')
     make_dir(accuracy_plot_path)
-    fig.savefig(accuracy_plot_path + '/model_accuracy_loss_plot.png')
+    fig.savefig(accuracy_plot_path + f'/model_accuracy_loss_plot{EPOCHS}.png')
 
 def plot_model_outline(model):
     """

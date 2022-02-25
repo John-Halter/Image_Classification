@@ -11,7 +11,7 @@ import matplotlib.image as mpimg
 from icrawler.builtin import BingImageCrawler
 
 
-def download_pictures(name_of_labels, num_of_pics):
+def download_images(name_of_labels, num_of_pics):
     """
     Function to download images and put into seperate directories based on label
     :param name_of_labels: The name of the labels for classification
@@ -36,7 +36,7 @@ def _keep_delete(input, filename):
         os.remove(filename)
 
 
-def verify_pictures(main_dir):
+def verify_images(main_dir):
     """
     Function to iterate through directory of images and verify if they are to be kept or removed
     :param main_dir: The directory

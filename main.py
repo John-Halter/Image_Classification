@@ -7,7 +7,7 @@ Last Updated: 02/21/22
 from matplotlib import pyplot as plt
 from pathlib2 import Path
 
-from dataset_creation.dataset_gather import download_pictures, verify_pictures
+from dataset_creation.dataset_gather import download_images, verify_images
 from dataset_creation.dataset_manipulation import split_train_test
 from Constants import LIST_OF_SPECIES, OUTPUT_DIR, NUM_OF_PICS
 from cnn import cnn_model
@@ -27,16 +27,16 @@ if __name__ == '__main__':
     # Run the cnn model
     run_cnn = True
     # Print the model structure
-    model_outline = True
+    model_outline = False
     # Print an example of the features of the model for an image
     feature = False
 
     if download_pics:
         for i in range(len(LIST_OF_SPECIES)):
-            download_pictures(LIST_OF_SPECIES[i], NUM_OF_PICS)
+            download_images(LIST_OF_SPECIES[i], NUM_OF_PICS)
 
     if verify_pics:
-        verify_pictures(OUTPUT_DIR)
+        verify_images(OUTPUT_DIR)
 
     if split:
         split_train_test(OUTPUT_DIR)
