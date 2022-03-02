@@ -75,7 +75,7 @@ Meaning that 40-50 epochs is probably the most effective number for accuracy wit
 ### How To Use Project
 ___
 To use this project all functionality is stored in main. Beginning with the first condition *download_images*.
-If you want to run it properly start with this condition by itself then do the same for the other conditions.
+If you want to run it properly start with this condition by itself then do the same for each condition below download images.
 If done right the pictures will be downloaded, then the user will want to verify the images, the dataset will be split,
 Then the model will be run. The file *CONSTANTS* is used to adjust several parameters used throughout the code. 
 
