@@ -74,8 +74,10 @@ Meaning that 40-50 epochs is probably the most effective number for accuracy wit
 
 ### How To Use Project
 ___
-To use this project all functionality is stored in main. Beginning with the first condition *download_images*.
-If you want to run it properly start with this condition by itself then do the same for each condition below download images.
+IF you just run the condition *sample_dataset* then it will run the cnn model and should output similar results to the ones posted. 
+
+If you want to see the functionality of each function then beginning with the first condition *download_images* and set this to True while the others conditions are False.
+Then continue through the conditions setting each one to True and the others False until you reach *run_cnn*
 If done right the pictures will be downloaded, then the user will want to verify the images, the dataset will be split,
 Then the model will be run. The file *CONSTANTS* is used to adjust several parameters used throughout the code. 
 
