@@ -18,6 +18,9 @@ if __name__ == '__main__':
     training_dataset = Path.cwd() / 'train'
     testing_dataset = Path.cwd() / 'test'
 
+    sample_training_dataset = Path.cwd() / 'sample_data' / 'sample_train'
+    sample_testing_dataset = Path.cwd() / 'sample_data' / 'sample_test'
+
     # Conditions to access functionality of code
     download_pics = False
     # Verify if pictures are worth keeping
@@ -25,11 +28,13 @@ if __name__ == '__main__':
     # Split the dataset into the different sections
     split = False
     # Run the cnn model
-    run_cnn = True
+    run_cnn = False
     # Print the model structure
     model_outline = False
     # Print an example of the features of the model for an image
     feature = False
+
+    sample_dataset = True
 
     if download_pics:
         for i in range(len(LIST_OF_SPECIES)):
@@ -48,5 +53,9 @@ if __name__ == '__main__':
             plot_model_outline(model)
         if feature:
             plot_example_feature_map(model)
+
+    if sample_dataset:
+        model, acc, val_acc, loss, val_loss, epochs_range = cnn_model(sample_training_dataset, sample_testing_dataset)
+        plot_accuracy(acc, val_acc, loss, val_loss, epochs_range)
 
 plt.show()
